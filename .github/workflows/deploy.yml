@@ -3,7 +3,7 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - main  # Changed to match your default branch
+      - master  # Matches your default branch
 
 jobs:
   deploy:
@@ -22,10 +22,12 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
+        working-directory: dashboard  # Change to the subdirectory containing package.json
 
       # Step 4: Build the React app
       - name: Build React app
         run: npm run build
+        working-directory: dashboard  # Change to the subdirectory containing package.json
 
       # Step 5: Configure AWS credentials
       - name: Configure AWS Credentials
@@ -37,4 +39,4 @@ jobs:
 
       # Step 6: Sync the build folder contents to S3
       - name: Deploy to S3
-        run: aws s3 sync build/ s3://ecommerce-dashboard-ui-2222 --acl public-read --delete
+        run: aws s3 sync dashboard-ui/build/ s3://ecommerce-dashboard-ui-2222 --acl public-read --delete
