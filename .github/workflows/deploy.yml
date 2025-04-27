@@ -3,7 +3,7 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - master  # Matches your default branch
+      - main  # Matches your default branch
 
 jobs:
   deploy:
@@ -39,4 +39,4 @@ jobs:
 
       # Step 6: Sync the build folder contents to S3
       - name: Deploy to S3
-        run: aws s3 sync dashboard-ui/build/ s3://ecommerce-dashboard-ui-2222 --acl public-read --delete
+        run: aws s3 sync dashboard/build/ s3://ecommerce-dashboard-ui-2222 --acl public-read --delete
